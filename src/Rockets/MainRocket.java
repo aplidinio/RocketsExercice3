@@ -34,23 +34,22 @@ public class MainRocket {
 		
 		int [] speed1= {3,-5,15};
 		int [] speed2= {3,7,15};
-		int [] power1= {100,100,100};
+		int [] power1= {100,-100,100};
 		int [] power2= {12,28,60};
 
-		Rocket rocket1 = new Rocket ("32WESSDS", thrustersRocket1, speed1, power1);
-		Rocket rocket2 = new Rocket ("LDSFJA32", thrustersRocket2, speed2, power2);
+		Rocket rocket1 = new Rocket ("32WESSDS", thrustersRocket1);
+		Rocket rocket2 = new Rocket ("LDSFJA32", thrustersRocket2);
 		
 		System.out.println("Rocket " + rocket1.getCodeRocket() + " has " + rocket1.getThrusters().size() + " trusters. \n");
 		System.out.println("");
-	
-		
-		/*for (int i=0; i<3; i++) {
+			
+		for (int i=0; i<3; i++) {
 			
 			for (int j=0; j<Math.abs(speed1[i]); j++) {
-				rocket1.setAcceleration(speed1[i]);
+				rocket1.setAcceleration(speed1[i], power1[i]);
 				rocket1.run();
 			}
-		}*/
+		}
 		
 		Scanner sc = new Scanner(System.in);
 		String a= sc.nextLine();
@@ -62,19 +61,11 @@ public class MainRocket {
 		for (int i=0; i<3; i++) {
 			
 			for (int j=0; j<Math.abs(speed2[i]); j++) {
-				rocket2.setAcceleration(speed2[i]);
+				rocket2.setAcceleration(speed2[i], power2[i]);
 				rocket2.run();
 			}
 		}
 	
-		
-		/*Scanner sc = new Scanner(System.in);
-		String a= sc.nextLine();
-		System.out.println();
-		
-		rocket2.setAcceleration();*/
-
-
 	}
 
 }

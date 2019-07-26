@@ -7,16 +7,12 @@ public class Rocket extends Thread{
 	
 	private String codeRocket;
 	private ArrayList <Thruster> thrusters= new ArrayList<Thruster>();
-	private int [] speed;
-	private int [] power;
-	private int setAcceleration;
+	private int acceleration;
 	
-	public Rocket(String codeRocket, ArrayList<Thruster> thrusters, int []speed, int[]power) {
+	public Rocket(String codeRocket, ArrayList<Thruster> thrusters) {
 		
 		this.codeRocket=codeRocket;
 		this.thrusters=thrusters;
-		this.speed=speed;
-		this.power=power;
 		
 	}
 	public String getCodeRocket() {
@@ -31,38 +27,25 @@ public class Rocket extends Thread{
 	public void setThrusters(ArrayList<Thruster> thrusters) {
 		this.thrusters = thrusters;
 	}	
-	public int[] getSpeed() {
-		return speed;
-	}
-	public void setSpeed(int[] speed) {
-		this.speed = speed;
-	}
-	public int[] getPower() {
-		return power;
-	}
-	public void setPower(int[] power) {
-		this.power = power;
-	}
 	public void calculateSpeed() {
 		
-		int power=0, speed=0;
+		int calcPower=0, calcSpeed=0;
 		
 		for (Thruster e:thrusters) {
-			power+=e.getCurrentPower();
+			calcPower+=e.getCurrentPower();
 		}
-		speed = (int)(100 *Math.sqrt(power));
-		System.out.println("Current speed: " + speed);
+		calcSpeed = (int)(100 *Math.sqrt(calcPower));
+		System.out.println("Current speed: " + calcSpeed);
 	}
 	
-	public void setAcceleration(int increment) {
-		this.setAcceleration=increment;
-	}
+	public void setAcceleration(int speed, int power) {
+		
+		this.acceleration=Math.round(Math.abs(power)/speed);
+			}
 	
 	public int getAcceleration() {
-		return setAcceleration;
+		return acceleration;
 	}
-	
-	
 	
 	@Override
 	public String toString() {
@@ -71,14 +54,13 @@ public class Rocket extends Thread{
 	
 	public void run() {
 		
-		int speed;
+		int speed, aux;
 				
 		ExecutorService exec = Executors.newFixedThreadPool(thrusters.size());
 		
 		for (int i=0; i<thrusters.size(); i++){
 			
-			speed = Math.round((thrusters.get(i).getMaxPower())/(100*getAcceleration()));
-			
+			speed = Math.round(thrusters.get(i).getMaxPower()*getAcceleration()/100)+1;
 			if (speed<1 && speed>=0)//Necesario para evitar speed=0
 				speed=1;			
 			
@@ -105,7 +87,6 @@ public class Rocket extends Thread{
 		}
         
 	}
-	
 	
 }
 

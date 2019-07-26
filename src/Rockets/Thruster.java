@@ -36,8 +36,7 @@ public class Thruster extends Thread {
 	public int getCurrentPower() {
 		return currentPower;
 	}
-	
-	
+		
 	@Override
 	public String toString() {
 		
@@ -58,14 +57,11 @@ public class Thruster extends Thread {
 	
 	public void decelerate(int setDeceleration) {
 		
-	
-		currentPower+=setDeceleration;
-
+			currentPower+=setDeceleration;
 	
 		if (currentPower>=this.maxPower) 
 			currentPower=this.maxPower;
-		
-		
+				
 		if (currentPower<0)
 			currentPower=0;
 		
