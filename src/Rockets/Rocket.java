@@ -7,7 +7,7 @@ public class Rocket extends Thread{
 	
 	private String codeRocket;
 	private ArrayList <Thruster> thrusters= new ArrayList<Thruster>();
-	private int acceleration;
+	private double acceleration;
 	
 	public Rocket(String codeRocket, ArrayList<Thruster> thrusters) {
 		
@@ -40,10 +40,10 @@ public class Rocket extends Thread{
 	
 	public void setAcceleration(int speed, int power) {
 		
-		this.acceleration=Math.round(Math.abs(power)/speed);
+		this.acceleration=Math.abs(power)/speed;
 			}
 	
-	public int getAcceleration() {
+	public double getAcceleration() {
 		return acceleration;
 	}
 	
@@ -54,13 +54,13 @@ public class Rocket extends Thread{
 	
 	public void run() {
 		
-		int speed, aux;
+		double speed;
 				
 		ExecutorService exec = Executors.newFixedThreadPool(thrusters.size());
 		
 		for (int i=0; i<thrusters.size(); i++){
 			
-			speed = Math.round(thrusters.get(i).getMaxPower()*getAcceleration()/100)+1;
+			speed = thrusters.get(i).getMaxPower()*getAcceleration()/100;
 			if (speed<1 && speed>=0)//Necesario para evitar speed=0
 				speed=1;			
 			

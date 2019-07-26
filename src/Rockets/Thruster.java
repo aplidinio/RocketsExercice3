@@ -5,7 +5,7 @@ public class Thruster extends Thread {
 	private int rocket;
 	private int identification;
 	private int maxPower;
-	private int currentPower;
+	private double currentPower;
 	
 	public Thruster(int rocket, int identification, int maxPower) {
 		
@@ -33,17 +33,17 @@ public class Thruster extends Thread {
 		this.maxPower = maxPower;
 	}
 	
-	public int getCurrentPower() {
+	public double getCurrentPower() {
 		return currentPower;
 	}
 		
 	@Override
 	public String toString() {
 		
-		return "Rocket " + rocket + " Thruster " + identification + " -->  Current Power: " + currentPower;
+		return "Rocket " + rocket + " Thruster " + identification + " -->  Current Power: " + (int)currentPower;
 	}
 		
-	public void accelerate(int setAcceleration) {
+	public void accelerate(double setAcceleration) {
 		
 		currentPower+=setAcceleration;
 		
@@ -55,7 +55,7 @@ public class Thruster extends Thread {
 			
 		}
 	
-	public void decelerate(int setDeceleration) {
+	public void decelerate(double setDeceleration) {
 		
 			currentPower+=setDeceleration;
 	
